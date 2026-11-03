@@ -1,0 +1,15 @@
+# ADAPT site configuration. Change base_url to the S3 website endpoint or custom domain before deploying.
+base_url = "https://adapt.example.edu"
+title = "ADAPT"
+description = "How life responds to a changing world. A research initiative of the College of Arts and Sciences, University of Virginia."
+compile_sass = false
+build_search_index = false
+generate_feeds = false
+
+[markdown]
+smart_punctuation = true
+
+[extra]
+tagline = "How life responds to a changing world"
+affiliation = "College of Arts and Sciences, University of Virginia"
+contact_email = ""

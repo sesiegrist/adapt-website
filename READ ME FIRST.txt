@@ -1,0 +1,24 @@
+ADAPT WEBSITE
+
+TO LOOK AT THE SITE
+  Double-click "Preview site.command". A black window opens and your browser
+  opens the site. Leave the black window open while you look. Close it when done.
+  The first time, the Mac may say the file is from an unidentified developer.
+  If so, right-click it, choose Open, then click Open again. You only do this once.
+
+TO CHANGE WORDS ON THE SITE
+  Open the "content" folder. Each page is a text file ending in .md.
+  Open one in TextEdit, change the words, save. If the preview is running,
+  the browser updates by itself.
+  Leave the lines between the +++ marks alone. They tell the site the page title.
+
+WHAT THE FILES ARE
+  content/_index.md               the front page
+  content/themes.md               the four research themes
+  content/projects/               one file per project
+  content/opportunities/          one file per fellowship or award
+  content/people.md               steering committee
+  content/contact.md              contact details
+
+PLACES THAT STILL NEED REAL TEXT
+  Search for the words "TO BE" inside the content files.

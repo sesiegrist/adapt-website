@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ config.title }}{% endblock title %}</title>
+<meta name="description" content="{{ config.description }}">
+<link rel="stylesheet" href="{{ get_url(path='css/site.css') }}">
+</head>
+<body>
+<header class="masthead">
+  <div class="wrap">
+    <a class="brand" href="{{ get_url(path='/') }}">ADAPT</a>
+    <p class="tagline">{{ config.extra.tagline }}. {{ config.extra.affiliation }}.</p>
+  </div>
+</header>
+<nav><div class="wrap">
+  {% set root = get_section(path="_index.md") %}
+  {% for p in root.pages %}<a href="{{ p.permalink }}">{{ p.title }}</a>{% endfor %}
+  {% for s in root.subsections %}{% set sec = get_section(path=s) %}<a href="{{ sec.permalink }}">{{ sec.title }}</a>{% endfor %}
+</div></nav>
+<main class="wrap">
+{% block content %}{% endblock content %}
+</main>
+<footer><div class="wrap">ADAPT is supported by the {{ config.extra.affiliation }}.</div></footer>
+</body>
+</html>

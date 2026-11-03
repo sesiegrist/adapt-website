@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="lede">{{ section.content | safe }}</section>
+{% set projects = get_section(path="projects/_index.md") %}
+<section>
+  <h2>Initial projects</h2>
+  <div class="grid">
+  {% for p in projects.pages %}
+    <a class="card" href="{{ p.permalink }}"><h3>{{ p.title }}</h3>
+    {% if p.extra.faculty %}<p class="muted">{{ p.extra.faculty }}</p>{% endif %}</a>
+  {% endfor %}
+  </div>
+</section>
+{% set opps = get_section(path="opportunities/_index.md") %}
+<section>
+  <h2>Opportunities</h2>
+  <div class="grid">
+  {% for p in opps.pages %}<a class="card" href="{{ p.permalink }}"><h3>{{ p.title }}</h3></a>{% endfor %}
+  </div>
+</section>
+{% endblock content %}
