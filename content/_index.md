@@ -1,6 +1,5 @@
 +++
-title = "ADAPT"
-sort_by = "weight"
+title = "Overview"
 template = "index.html"
 +++
 

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ section.title }}</h1>
+{% set pages = paginator.pages %}
+{% include "partials/news-list.html" %}
+{% if paginator.number_pagers > 1 %}
+<nav class="pagination">
+  {% if paginator.previous %}<a href="{{ paginator.previous }}">← Newer</a>{% endif %}
+  <span>Page {{ paginator.current_index }} of {{ paginator.number_pagers }}</span>
+  {% if paginator.next %}<a href="{{ paginator.next }}">Older →</a>{% endif %}
+</nav>
+{% endif %}
+{% endblock %}

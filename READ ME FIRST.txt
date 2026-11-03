@@ -1,6 +1,6 @@
 ADAPT WEBSITE
 
-TO LOOK AT THE SITE
+TO LOOK AT THE SITE ON YOUR MAC
   Double-click "Preview site.command". A black window opens and your browser
   opens the site. Leave the black window open while you look. Close it when done.
   The first time, the Mac may say the file is from an unidentified developer.
@@ -10,15 +10,22 @@ TO CHANGE WORDS ON THE SITE
   Open the "content" folder. Each page is a text file ending in .md.
   Open one in TextEdit, change the words, save. If the preview is running,
   the browser updates by itself.
-  Leave the lines between the +++ marks alone. They tell the site the page title.
+  Leave the lines between the +++ marks alone unless you are changing a title.
 
 WHAT THE FILES ARE
   content/_index.md               the front page
-  content/themes.md               the four research themes
+  content/research.md             the four research themes
   content/projects/               one file per project
   content/opportunities/          one file per fellowship or award
-  content/people.md               steering committee
-  content/contact.md              contact details
+  content/people/                 one file per person
+  content/news/                   one file per news item (date in the filename)
+  content/contact.md              contact page
+  config.toml                     site title, menu, email address
+  README.md                       full instructions, including the AWS setup
 
 PLACES THAT STILL NEED REAL TEXT
-  Search for the words "TO BE" inside the content files.
+  Search the content folder for "TO BE".
+
+TO PUBLISH
+  Once the GitHub repository and AWS are set up (see README.md), every change
+  pushed to GitHub goes live by itself within a couple of minutes.

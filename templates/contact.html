@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ page.title }}</h1>
+<div class="contact">
+  <div class="prose">{{ page.content | safe }}</div>
+  <address>
+    {% for line in page.extra.address %}{% if loop.first %}<strong>{{ line }}</strong>{% else %}{{ line }}{% endif %}<br>{% endfor %}
+    {% if config.extra.email %}<br><a href="mailto:{{ config.extra.email }}">{{ config.extra.email }}</a>{% endif %}
+  </address>
+</div>
+{% endblock %}

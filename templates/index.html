@@ -1,21 +1,36 @@
 {% extends "base.html" %}
 {% block content %}
-<section class="lede">{{ section.content | safe }}</section>
+<section class="hero">
+  <h1>{{ config.title }}</h1>
+  <p class="lead">{{ config.description }}. {{ config.extra.subtitle }}.</p>
+</section>
+
+<section class="prose">{{ section.content | safe }}</section>
+
 {% set projects = get_section(path="projects/_index.md") %}
 <section>
-  <h2>Initial projects</h2>
+  <h2>Projects</h2>
   <div class="grid">
-  {% for p in projects.pages %}
-    <a class="card" href="{{ p.permalink }}"><h3>{{ p.title }}</h3>
-    {% if p.extra.faculty %}<p class="muted">{{ p.extra.faculty }}</p>{% endif %}</a>
-  {% endfor %}
+    {% for p in projects.pages | slice(end=3) %}{% include "partials/card.html" %}{% endfor %}
   </div>
+  <p><a href="{{ projects.path }}">All projects →</a></p>
 </section>
+
 {% set opps = get_section(path="opportunities/_index.md") %}
 <section>
   <h2>Opportunities</h2>
   <div class="grid">
-  {% for p in opps.pages %}<a class="card" href="{{ p.permalink }}"><h3>{{ p.title }}</h3></a>{% endfor %}
+    {% for p in opps.pages %}{% include "partials/card.html" %}{% endfor %}
   </div>
 </section>
-{% endblock content %}
+
+{% set news = get_section(path="news/_index.md") %}
+{% if news.pages | length > 0 %}
+<section>
+  <h2>News</h2>
+  {% set pages = news.pages | slice(end=3) %}
+  {% include "partials/news-list.html" %}
+  <p><a href="{{ news.path }}">All news →</a></p>
+</section>
+{% endif %}
+{% endblock %}

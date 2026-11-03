@@ -1,0 +1,9 @@
+<ul class="news-list">
+{% for p in pages %}
+  <li>
+    <time datetime="{{ p.date }}">{{ p.date | date(format="%b %d, %Y") }}</time>
+    <a href="{{ p.path }}">{{ p.title }}</a>
+    {% if p.description %}<p>{{ p.description }}</p>{% endif %}
+  </li>
+{% endfor %}
+</ul>

@@ -1,0 +1,18 @@
+{%- set current = current_path | default(value="/") -%}
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="/">ADAPT</a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Toggle navigation">
+    <label for="nav-toggle" class="nav-toggle-label"><span></span></label>
+    <nav class="site-nav">
+      {% for item in config.extra.menu %}
+        {%- if item.url == "/" -%}
+          {%- set active = current == "/" -%}
+        {%- else -%}
+          {%- set active = item.url in current -%}
+        {%- endif -%}
+        <a href="{{ item.url }}"{% if active %} class="active" aria-current="page"{% endif %}>{{ item.name }}</a>
+      {% endfor %}
+    </nav>
+  </div>
+</header>

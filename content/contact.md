@@ -1,9 +1,11 @@
 +++
 title = "Contact"
-weight = 5
-template = "page.html"
+template = "contact.html"
+
+[extra]
+address = ["ADAPT", "College of Arts and Sciences", "University of Virginia", "Charlottesville, VA 22904"]
 +++
 
-<!-- PROGRAM EMAIL AND MAILING LIST SIGN-UP TO BE ADDED -->
+<!-- PROGRAM EMAIL TO BE ADDED in config.toml under [extra] email -->
 
-Contact information for the ADAPT program will be posted here.
+We welcome inquiries from prospective fellows, students and collaborators.

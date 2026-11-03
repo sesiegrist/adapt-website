@@ -1,0 +1,63 @@
+name: Build and deploy to S3
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build site
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/app" \
+            -w /app \
+            ghcr.io/getzola/zola:v0.22.1 \
+            build
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Sync HTML to S3
+        run: |
+          aws s3 sync public/ "s3://${{ secrets.S3_BUCKET }}" \
+            --exclude "*" --include "*.html" \
+            --cache-control "public,max-age=60,must-revalidate" \
+            --content-type "text/html; charset=utf-8" \
+            --metadata-directive REPLACE
+
+      - name: Sync feeds/XML to S3
+        run: |
+          aws s3 sync public/ "s3://${{ secrets.S3_BUCKET }}" \
+            --exclude "*" --include "*.xml" \
+            --cache-control "public,max-age=60,must-revalidate" \
+            --content-type "application/xml; charset=utf-8" \
+            --metadata-directive REPLACE
+
+      - name: Sync CSS/JS to S3
+        run: |
+          aws s3 sync public/ "s3://${{ secrets.S3_BUCKET }}" \
+            --exclude "*" --include "*.css" --include "*.js" \
+            --cache-control "public,max-age=31536000,immutable" \
+            --metadata-directive REPLACE
+
+      - name: Sync media and remaining assets to S3
+        run: |
+          aws s3 sync public/ "s3://${{ secrets.S3_BUCKET }}" --delete \
+            --exclude "*.html" --exclude "*.xml" --exclude "*.css" --exclude "*.js" \
+            --cache-control "public,max-age=604800" \
+            --metadata-directive REPLACE
+
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}" \
+            --paths "/*.html" "/" "/research/*" "/projects/*" "/opportunities/*" "/people/*" "/news/*" "/contact/*" "/tags/*" "/style.css*" "/atom.xml"

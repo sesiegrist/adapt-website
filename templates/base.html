@@ -1,27 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ config.default_language }}">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{% block title %}{{ config.title }}{% endblock title %}</title>
-<meta name="description" content="{{ config.description }}">
-<link rel="stylesheet" href="{{ get_url(path='css/site.css') }}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% if page.title %}{{ page.title }} · {% elif section.title and section.path != "/" %}{{ section.title }} · {% endif %}{{ config.title }}{% endblock %}</title>
+  <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ config.description }}{% endif %}">
+  <link rel="stylesheet" href="{{ get_url(path='style.css', cachebust=true) | replace(from=config.base_url, to='') }}">
+  <link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path='atom.xml', trailing_slash=false) | replace(from=config.base_url, to='') }}">
 </head>
 <body>
-<header class="masthead">
-  <div class="wrap">
-    <a class="brand" href="{{ get_url(path='/') }}">ADAPT</a>
-    <p class="tagline">{{ config.extra.tagline }}. {{ config.extra.affiliation }}.</p>
-  </div>
-</header>
-<nav><div class="wrap">
-  {% set root = get_section(path="_index.md") %}
-  {% for p in root.pages %}<a href="{{ p.permalink }}">{{ p.title }}</a>{% endfor %}
-  {% for s in root.subsections %}{% set sec = get_section(path=s) %}<a href="{{ sec.permalink }}">{{ sec.title }}</a>{% endfor %}
-</div></nav>
-<main class="wrap">
-{% block content %}{% endblock content %}
-</main>
-<footer><div class="wrap">ADAPT is supported by the {{ config.extra.affiliation }}.</div></footer>
+  {% include "partials/header.html" %}
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+  {% include "partials/footer.html" %}
 </body>
 </html>

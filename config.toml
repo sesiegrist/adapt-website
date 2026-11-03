@@ -1,15 +1,37 @@
-# ADAPT site configuration. Change base_url to the S3 website endpoint or custom domain before deploying.
-base_url = "https://adapt.example.edu"
+# Production URL of the site (CloudFront / custom domain). No trailing slash.
+# Change this once the domain is registered. In-page links are root-relative,
+# so local `zola serve` keeps working regardless of this value.
+base_url = "https://adaptbiology.org"
 title = "ADAPT"
-description = "How life responds to a changing world. A research initiative of the College of Arts and Sciences, University of Virginia."
-compile_sass = false
+description = "How life responds to a changing world"
+default_language = "en"
+
+compile_sass = true
+minify_html = true
 build_search_index = false
-generate_feeds = false
+generate_feeds = true
+feed_filenames = ["atom.xml"]
+
+taxonomies = [
+  { name = "tags", feed = true },
+]
 
 [markdown]
 smart_punctuation = true
+external_links_target_blank = true
 
 [extra]
-tagline = "How life responds to a changing world"
-affiliation = "College of Arts and Sciences, University of Virginia"
-contact_email = ""
+# Main navigation (order matters)
+menu = [
+  { name = "Overview",      url = "/" },
+  { name = "Research",      url = "/research/" },
+  { name = "Projects",      url = "/projects/" },
+  { name = "Opportunities", url = "/opportunities/" },
+  { name = "People",        url = "/people/" },
+  { name = "News",          url = "/news/" },
+  { name = "Contact",       url = "/contact/" },
+]
+subtitle = "Adaptive life sciences at the University of Virginia"
+school = "College of Arts and Sciences"
+institution = "University of Virginia"
+email = ""

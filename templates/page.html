@@ -1,7 +1,10 @@
 {% extends "base.html" %}
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock title %}
 {% block content %}
-<h1>{{ page.title }}</h1>
-{% if page.extra.faculty %}<p class="muted">{{ page.extra.faculty }}</p>{% endif %}
-{{ page.content | safe }}
-{% endblock content %}
+<article class="prose">
+  {% if page.ancestors | length > 1 %}{% set parent = get_section(path=page.ancestors | last) %}<p class="breadcrumb"><a href="{{ parent.path }}">← {{ parent.title }}</a></p>{% endif %}
+  <h1>{{ page.title }}</h1>
+  {% if page.description %}<p class="lead">{{ page.description }}</p>{% endif %}
+  {% if page.extra.faculty %}<p class="muted"><strong>Faculty:</strong> {{ page.extra.faculty }}</p>{% endif %}
+  {{ page.content | safe }}
+</article>
+{% endblock %}

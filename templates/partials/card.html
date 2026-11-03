@@ -1,0 +1,9 @@
+<article class="card">
+  {% if p.extra.image %}
+  <a class="card-media" href="{{ p.path }}">
+    <img src="{{ get_url(path=p.extra.image) | replace(from=config.base_url, to='') }}" alt="{{ p.title }}" loading="lazy" decoding="async">
+  </a>
+  {% endif %}
+  <h3><a href="{{ p.path }}">{{ p.title }}</a></h3>
+  {% if p.description %}<p>{{ p.description }}</p>{% endif %}
+</article>

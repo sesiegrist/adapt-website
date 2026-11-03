@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<article class="prose person-page">
+  <p class="breadcrumb"><a href="/people/">← People</a></p>
+  {% if page.extra.photo %}<img class="person-photo" src="{{ get_url(path=page.extra.photo) | replace(from=config.base_url, to='') }}" alt="{{ page.title }}">{% endif %}
+  <h1>{{ page.title }}</h1>
+  <p class="role">{{ page.extra.role }}{% if page.extra.department %} · {{ page.extra.department }}{% endif %}</p>
+  {% if page.extra.website %}<p><a href="{{ page.extra.website }}">{{ page.extra.website }}</a></p>{% endif %}
+  {% if page.extra.email %}<p><a href="mailto:{{ page.extra.email }}">{{ page.extra.email }}</a></p>{% endif %}
+  {{ page.content | safe }}
+</article>
+{% endblock %}
