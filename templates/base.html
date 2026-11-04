@@ -5,14 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{% if page.title %}{{ page.title }} · {% elif section.title and section.path != "/" %}{{ section.title }} · {% endif %}{{ config.title }}{% endblock %}</title>
   <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ config.description }}{% endif %}">
+  {% if config.extra.coming_soon %}<meta name="robots" content="noindex">{% endif %}
   <link rel="stylesheet" href="{{ get_url(path='style.css', cachebust=true) | replace(from=config.base_url, to='') }}">
   <link rel="alternate" type="application/atom+xml" title="{{ config.title }}" href="{{ get_url(path='atom.xml', trailing_slash=false) | replace(from=config.base_url, to='') }}">
 </head>
 <body>
+  {% if config.extra.coming_soon %}
+  <main class="container holding-wrap">{% include "partials/coming-soon.html" %}</main>
+  {% include "partials/footer.html" %}
+  {% else %}
   {% include "partials/header.html" %}
   <main class="container">
     {% block content %}{% endblock %}
   </main>
   {% include "partials/footer.html" %}
+  {% endif %}
 </body>
 </html>

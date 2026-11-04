@@ -4,6 +4,12 @@ Static site for ADAPT, built with [Zola](https://www.getzola.org/) and deployed 
 
 Live site: https://adaptbiology.org
 
+## Launching
+
+While `coming_soon = true` in `config.toml`, every address on the site shows a single holding page and search engines are asked not to index it. To publish the full site, change that line to `coming_soon = false`, commit and push.
+
+To preview the full site locally without changing the live setting, run `zola serve` and temporarily flip the flag, or just leave it flipped on your machine and do not commit that change.
+
 ## Editing content
 
 Everything a visitor reads lives under `content/` as Markdown:

@@ -21,6 +21,8 @@ smart_punctuation = true
 external_links_target_blank = true
 
 [extra]
+# Set to false to publish the full site. While true, every page shows the holding page.
+coming_soon = true
 # Main navigation (order matters)
 menu = [
   { name = "Overview",      url = "/" },
